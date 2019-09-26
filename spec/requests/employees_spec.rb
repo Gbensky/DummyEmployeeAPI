@@ -22,6 +22,9 @@ describe "Dummy Rest API Example" do
 
   	$id = res["id"]
   	expect(res["id"].empty?).to eq(false)
+  	expect(res["name"]).to eq($name)
+  	expect(res["salary"]).to eq($salary.to_s)
+  	expect(res["age"]).to eq($age.to_s)
 
   end
 
@@ -31,9 +34,10 @@ describe "Dummy Rest API Example" do
 
     res = JSON.parse(response.body)
 
-    employ = res["employee_name"]
-
-    expect(employ).to eq($name)
+    expect(res["id"]).to eq($id)
+    expect(res["employee_name"]).to eq($name)
+    expect(res["employee_salary"]).to eq($salary.to_s)
+    expect(res["employee_age"]).to eq($age.to_s)
   end
 
   it "delete an employee record" do
@@ -42,9 +46,9 @@ describe "Dummy Rest API Example" do
 
     res = JSON.parse(response.body)
 
-    employ = res["success"]["text"]
+    message = res["success"]["text"]
 
-    expect(employ).to eq("successfully! deleted Records")
+    expect(message).to eq("successfully! deleted Records")
 
   end
 end
